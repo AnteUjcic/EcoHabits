@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Welcome, {{ user.username }}!</h2>
+<h3>Your Habits:</h3>
+<ul>
+    {% for uh in user_habits %}
+    <li>{{ uh.habit.name }} ({{ uh.frequency }})</li>
+    {% endfor %}
+</ul>
+
+<h3>Your Goals:</h3>
+<ul>
+    {% for g in user_goals %}
+    <li>{{ g.description }} - Due: {{ g.target_date }} - Achieved: {{ g.achieved }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
