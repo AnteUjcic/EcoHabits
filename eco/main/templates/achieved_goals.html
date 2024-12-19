@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Achieved Goals</h2>
+
+<ul>
+    {% for goal in achieved_goals %}
+    <li>
+        <strong>{{ goal.description }}</strong> - Completed by: {{ goal.target_date }}
+    </li>
+    {% empty %}
+    <li>No achieved goals yet.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'dashboard' %}">Back to Dashboard</a>
+{% endblock %}

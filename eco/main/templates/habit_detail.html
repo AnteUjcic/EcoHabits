@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>{{ habit.name }}</h2>
+  <p>{{ habit.description }}</p>
+  <p>Points: {{ habit.points }}</p>
+  <a href="{% url 'habit_update' habit.pk %}">Edit</a>
+  <a href="{% url 'habit_delete' habit.pk %}">Delete</a>
+{% endblock %}

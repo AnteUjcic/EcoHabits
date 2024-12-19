@@ -2,17 +2,32 @@
 
 {% block content %}
 <h2>Welcome, {{ user.username }}!</h2>
+
 <h3>Your Habits:</h3>
 <ul>
     {% for uh in user_habits %}
-    <li>{{ uh.habit.name }} ({{ uh.frequency }})</li>
+    <li>
+        <strong>{{ uh.habit.name }}</strong> - Frequency: {{ uh.frequency }}
+        <a href="{% url 'habit_detail' uh.habit.pk %}">View Details</a>
+    </li>
+    {% empty %}
+    <li>No habits found. <a href="{% url 'habit_add' %}">Add a new habit</a>.</li>
     {% endfor %}
 </ul>
 
 <h3>Your Goals:</h3>
 <ul>
     {% for g in user_goals %}
-    <li>{{ g.description }} - Due: {{ g.target_date }} - Achieved: {{ g.achieved }}</li>
+    <li>
+        <strong>{{ g.description }}</strong> - Due: {{ g.target_date }} - 
+        {% if g.achieved %}
+        <strong>Achieved</strong>
+        {% else %}
+        <strong>Not Achieved</strong>
+        {% endif %}
+    </li>
+    {% empty %}
+    <li>No goals found. <a href="{% url 'habit_add' %}">Set a new goal</a>.</li>
     {% endfor %}
 </ul>
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>All Habits</h2>
+
+<form method="get" action="{% url 'habit_list' %}">
+    <input type="text" name="search" placeholder="Search by name" value="{{ request.GET.search }}">
+    <button type="submit">Search</button>
+</form>
+
+
+<ul>
+    {% for habit in habits %}
+    <li>
+        <strong>{{ habit.name }}</strong> - {{ habit.points }} points
+    </li>
+    {% empty %}
+    <li>No habits found.</li>
+    {% endfor %}
+</ul>
+
+<div>
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+    {% if page_obj.has_previous %}
+        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.order %}order={{ request.GET.order }}&{% endif %}page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% if page_obj.has_next %}
+        <a href="?{% if request.GET.search %}search={{ request.GET.search }}&{% endif %}{% if request.GET.order %}order={{ request.GET.order }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+</div>
+
+{% endblock %}

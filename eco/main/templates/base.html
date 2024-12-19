@@ -1,17 +1,21 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Environmental Habits Application</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Habits App{% endblock %}</title>
 </head>
 <body>
     <header>
         <nav>
             {% if user.is_authenticated %}
                 <a href="{% url 'dashboard' %}">Dashboard</a>
+                <a href="{% url 'habit_list' %}">All Habits</a>
+                <a href="{% url 'habit_add' %}">Add Habit</a>
                 <a href="{% url 'logout' %}">Logout</a>
-            {% else %}
+                <a href="{% url 'goal_add' %}">Add Goal</a>
+                <a href="{% url 'achieved_goals' %}">Achieved Goals</a>
+                {% else %}
                 <a href="{% url 'login' %}">Login</a>
             {% endif %}
         </nav>
